@@ -1,0 +1,31 @@
+extends ../layout
+
+block content
+    h2 Usuários
+    hr
+
+    .col-sm-8.col-sm-offset-2
+        p
+            a.btn.btn-default(href='/signup', role='button')
+                i.fa.fa-plus
+                | Novo Usuário
+        table.table.table-striped.table-bordered.table-condensed
+            thead
+                tr
+                    th id
+                    th Nome
+                    th Papel
+                    th Admin
+                    th Ações
+                tbody
+                    each user in users
+                        tr
+                            td=user._id
+                            td=user.profile.name
+                            td=user.role
+                            td=user.isadmin
+                            td
+                                .btn.btn-default
+                                    i.fa.fa-pencil
+                                .btn.btn-danger
+                                    i.fa.fa-remove
