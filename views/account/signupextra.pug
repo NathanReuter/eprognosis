@@ -35,10 +35,10 @@ block content
       label.col-sm-3.control-label Papel
       .col-sm-6
         label.radio.col-sm-3
-          input(type='radio', checked=newuser.role == 'user', name='role', value='user', data-toggle='radio')
+          input(type='radio', checked=newuser.role == 'user', name='role', value='user', data-toggle='radio', required=true)
           span Usuário
         label.radio.col-sm-3
-          input(type='radio', checked=newuser.role == 'doctor', name='role', value='doctor', data-toggle='radio')
+          input(type='radio', checked=newuser.role == 'doctor', name='role', value='doctor', data-toggle='radio', required=true)
           span Médico
     .form-group
       label.col-sm-3.control-label(for='location') Endereço

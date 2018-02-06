@@ -3,7 +3,6 @@ extends ../layout
 block content
     h2 Usuários
     hr
-
     .col-sm-8.col-sm-offset-2
         p
             a.btn.btn-default(href='/signup', role='button')
@@ -27,5 +26,33 @@ block content
                             td
                                 .btn.btn-default
                                     i.fa.fa-pencil
-                                .btn.btn-danger
+                                .btn.btn-danger(onclick='removeUser(' + "'" + user._id + "'" + ')')
                                     i.fa.fa-remove
+    script.
+        var getCSRFToken = function () {
+          return $('meta[name="csrf-token"]').attr('content');
+        };
+
+        var routes = {
+            removeRoute: '/admin/users',
+            updateRoute: '/user'
+        };
+
+        var removeUser = function (id) {
+            if ($ && id) {
+                $.ajax({
+                    type: "DELETE",
+                    url: location.origin.concat(routes.removeRoute),
+                    data: {
+                        _csrf: getCSRFToken(),
+                        userid: id
+                    },
+                    complete: function () {
+                      location.reload();
+                    }
+                });
+            } else {
+                alert('Missing Jquery');
+            }
+        };
+

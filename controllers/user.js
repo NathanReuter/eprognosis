@@ -453,3 +453,36 @@ exports.postForgot = (req, res, next) => {
     .then(() => res.redirect('/forgot'))
     .catch(next);
 };
+
+
+/**
+ * DELETE /admin/user
+ * Remover User
+ */
+
+exports.removeUser = (req, res, next) => {
+  const userId = req.query.userid || req.body.userid;
+  if (userId) {
+    User.count({ isadmin: true }, (err, adminsCount) => {
+      if (err) {
+        return next(err);
+      }
+      console.log('adminsCount', adminsCount);
+
+      User.findById({ _id: userId }, (err, user) => {
+        if (err) { return next(err); }
+        if (!user.isadmin || adminsCount > 1) {
+          user.remove();
+          req.flash('info', { msg: 'Usuário Removido' });
+          res.send(200);
+        } else {
+          req.flash('errors', { msg: 'Não é possivel remover todos os administradores do sistema' });
+          res.send(400);
+        }
+      });
+    });
+  } else {
+    req.flash('errors', { msg: 'Erro: Faltando identificador do usuário' });
+    res.send(400);
+  }
+};
