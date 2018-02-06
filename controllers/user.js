@@ -486,3 +486,25 @@ exports.removeUser = (req, res, next) => {
     res.send(400);
   }
 };
+
+
+exports.getEditUser = (req, res, next) => {
+  const userid = req.query.userid;
+
+  if (userid) {
+    User.findById(userid, (err, requestedUser) => {
+      if (err) { return next(err); }
+      res.render('admin/edituser', {
+        title: 'Editar Usuário',
+        requestedUser
+      });
+    });
+  } else {
+    res.send(500);
+  }
+};
+
+
+exports.putUpdateUser = (req, res) => {
+  res.send(200);
+};

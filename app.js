@@ -140,6 +140,8 @@ app.post('/account/delete', passportConfig.isAuthenticated, userController.postD
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 app.get('/admin/users', passportConfig.isAuthenticated, userController.getUsersPage);
 app.delete('/admin/users', passportConfig.isAuthenticated, userController.removeUser);
+app.put('/admin/users', passportConfig.isAuthenticated, userController.putUpdateUser);
+app.get('/admin/edituser', passportConfig.isAuthenticated, userController.getEditUser);
 
 /**
  * API examples routes.

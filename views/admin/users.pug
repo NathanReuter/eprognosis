@@ -24,7 +24,7 @@ block content
                             td=user.role
                             td=user.isadmin
                             td
-                                .btn.btn-default
+                                a.btn.btn-default(href='/admin/edituser?userid=' + user._id)
                                     i.fa.fa-pencil
                                 .btn.btn-danger(onclick='removeUser(' + "'" + user._id + "'" + ')')
                                     i.fa.fa-remove
@@ -47,7 +47,7 @@ block content
                         _csrf: getCSRFToken(),
                         userid: id
                     },
-                    complete: function () {
+                  complete: function () {
                       location.reload();
                     }
                 });
