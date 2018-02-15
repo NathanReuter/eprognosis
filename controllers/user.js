@@ -151,7 +151,6 @@ exports.postUpdateProfile = (req, res, next) => {
     user.profile.name = req.body.name || '';
     user.profile.gender = req.body.gender || '';
     user.profile.location = req.body.location || '';
-    user.profile.website = req.body.website || '';
     user.role = req.body.role || '';
     user.isadmin = req.body.isadmin || false;
     user.save((err) => {
@@ -216,7 +215,6 @@ exports.postSignupExtra = (req, res, next) => {
     user.profile.name = req.body.name || '';
     user.profile.gender = req.body.gender || '';
     user.profile.location = req.body.location || '';
-    user.profile.website = req.body.website || '';
     user.role = req.body.role || '';
     user.isadmin = req.body.isadmin || false;
     user.save((err) => {
@@ -505,6 +503,61 @@ exports.getEditUser = (req, res, next) => {
 };
 
 
-exports.putUpdateUser = (req, res) => {
-  res.send(200);
+exports.putUpdateUser = (req, res, next) => {
+  const userId = req.query.userid;
+
+  req.assert('email', 'Por favor entre um endereço de email valido').isEmail();
+  req.sanitize('email').normalizeEmail({ gmail_remove_dots: false });
+
+  const errors = req.validationErrors();
+
+  if (errors) {
+    req.flash('errors', errors);
+    return res.redirect('/account');
+  }
+
+  User.findById(userId, (err, user) => {
+    if (err) {
+      return next(err);
+    }
+
+    user.email = req.body.email || '';
+    user.profile.name = req.body.name || '';
+    user.profile.gender = req.body.gender || '';
+    user.profile.location = req.body.location || '';
+    user.role = req.body.role || '';
+    user.isadmin = req.body.isadmin || false;
+    user.save((err) => {
+      if (err) {
+        if (err.code === 11000) {
+          req.flash('errors', { msg: 'O email já esta sendo utilizado em outra conta.' });
+          return res.redirect('/account');
+        }
+        return next(err);
+      }
+      req.flash('Sucesso', { msg: 'Usuário Criado com sucesso' });
+      res.redirect('/admin/users');
+    });
+  });
+};
+
+exports.updateProfilePhoto = (req, res, next) => {
+  const userId = req.query.userid;
+  const uploadedPhotoPath = `/${req.file.path}`;
+
+  User.findById(userId, (err, user) => {
+    if (err) { return next(err); }
+    user.profile.picture = uploadedPhotoPath;
+    user.save((err) => {
+      if (err) {
+        if (err.code === 11000) {
+          req.flash('errors', { msg: 'The email address you have entered is already associated with an account.' });
+          return res.redirect('/admin/edituser');
+        }
+        return next(err);
+      }
+      req.flash('success', { msg: 'Profile information has been updated.' });
+      res.redirect('/admin/edituser?userid='.concat(userId));
+    });
+  });
 };

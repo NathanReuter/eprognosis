@@ -23,11 +23,11 @@ block content
                             td=user.profile.name
                             td=user.role
                             td=user.isadmin
-                            td
+                            td.table-button
                                 a.btn.btn-default(href='/admin/edituser?userid=' + user._id)
-                                    i.fa.fa-pencil
+                                    i.fas.fa-edit
                                 .btn.btn-danger(onclick='removeUser(' + "'" + user._id + "'" + ')')
-                                    i.fa.fa-remove
+                                    i.fas.fa-trash-alt
     script.
         var getCSRFToken = function () {
           return $('meta[name="csrf-token"]').attr('content');

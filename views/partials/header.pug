@@ -7,31 +7,47 @@
         span.icon-bar
         span.icon-bar
       a.navbar-brand(href='/')
-        i.fa.fa-cube
+        i.fas.fa-bowling-ball
         | MederiSports
     .collapse.navbar-collapse
       ul.nav.navbar-nav
         li(class=(title === 'Home') ? 'active' : undefined)
           a(href='/') Home
-        li(class=(title === 'Contact') ? 'active' : undefined)
-          a(href='/contact') Contato
+        if user
+          li.dropdown(class=(title === 'Atendimento') ? 'active' : undefined)
+            a.dropdown-toggle(href='#', data-toggle='dropdown')
+              span
+                | Atendimento
+              i.caret
+            ul.dropdown-menu
+              li
+                a(href='/admin/users')
+                  i.fas.fa-address-book
+                  | Consultas
+              li.divider
+              li
+                a(href='/status')
+                  i.fab.fa-accessible-icon
+                  | Pacientes
         if user && user.isadmin
           li.dropdown(class=(title === 'Admin') ? 'active' : undefined)
             a.dropdown-toggle(href='#', data-toggle='dropdown')
               span
-                i.fa.fa-cog
+                i.fas.fa-cog
                 | Admin
               i.caret
             ul.dropdown-menu
               li
                 a(href='/admin/users')
-                  i.fa.fa-users
+                  i.fas.fa-users
                   | Usuários
               li.divider
               li
                 a(href='/status')
-                  i.fa.fa-server
+                  i.fas.fa-server
                   | Status Servidor
+        li(class=(title === 'Contact') ? 'active' : undefined)
+          a(href='/contact') Contato
       if user
         ul.nav.navbar-nav.navbar-right
             li.dropdown(class=(title === 'Account Management') ? 'active' : undefined)

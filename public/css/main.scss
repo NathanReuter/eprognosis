@@ -1,9 +1,13 @@
-@import "themes/default/variables";
+@import "themes/flatly/variables";
+//@import "themes/gsdk/gsdk/variables";
 
 @import "lib/bootstrap/bootstrap";
-@import "lib/font-awesome/font-awesome";
+@import "lib/font-awesome/fontawesome";
+@import "lib/font-awesome/fa-solid";
+@import "lib/font-awesome/fa-brands";
 
-@import "themes/default/default";
+@import "themes/flatly/flatly";
+//@import "themes/gsdk/gsdk";
 
 // Scaffolding
 // -------------------------
@@ -65,7 +69,7 @@ textarea {
 // Font Icons
 // -------------------------
 
-.fa {
+.fa, .fas, .fab {
   margin-right: 6px;
 }
 
@@ -78,4 +82,14 @@ textarea {
   padding: 25px 25px 20px;
   max-width: 600px;
   margin: 0 auto;
+}
+
+.table-button {
+  .fa, .fas, .fab {
+    margin: 0;
+  }
+
+  a {
+    margin: 0 5px;
+  }
 }

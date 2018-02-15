@@ -19,8 +19,21 @@ const expressValidator = require('express-validator');
 const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
 const multer = require('multer');
+const crypto = require('crypto');
 
-const upload = multer({ dest: path.join(__dirname, 'uploads') });
+/* Multer Storage Config */
+const storage = multer.diskStorage({
+  destination: './uploads/',
+  filename(req, file, cb) {
+    crypto.pseudoRandomBytes(16, (err, raw) => {
+      if (err) return cb(err);
+
+      cb(null, raw.toString('hex') + path.extname(file.originalname));
+    });
+  }
+});
+
+const upload = multer({ storage });
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -57,6 +70,10 @@ mongoose.connection.on('error', (err) => {
   process.exit();
 });
 
+
+/* Excluded CSRF ROUTES */
+
+const exlucedCSRFRoutes = ['/api/upload', '/admin/edituser/upload'];
 /**
  * Express configuration.
  */
@@ -88,7 +105,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use((req, res, next) => {
-  if (req.path === '/api/upload') {
+  if (exlucedCSRFRoutes.indexOf(req.path) !== -1) {
     next();
   } else {
     lusca.csrf()(req, res, next);
@@ -115,10 +132,13 @@ app.use((req, res, next) => {
   next();
 });
 app.use(express.static(path.join(__dirname, 'public'), { maxAge: 31557600000 }));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'), { maxAge: 31557600000 }));
 
 /**
  * Primary app routes.
  */
+
+// TODO add authantication by roles too
 app.get('/', passportConfig.isAuthenticated, homeController.index);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
@@ -140,8 +160,9 @@ app.post('/account/delete', passportConfig.isAuthenticated, userController.postD
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 app.get('/admin/users', passportConfig.isAuthenticated, userController.getUsersPage);
 app.delete('/admin/users', passportConfig.isAuthenticated, userController.removeUser);
-app.put('/admin/users', passportConfig.isAuthenticated, userController.putUpdateUser);
+app.post('/admin/users', passportConfig.isAuthenticated, userController.putUpdateUser);
 app.get('/admin/edituser', passportConfig.isAuthenticated, userController.getEditUser);
+app.post('/admin/edituser/upload', upload.single('profile'), userController.updateProfilePhoto);
 
 /**
  * API examples routes.

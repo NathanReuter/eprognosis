@@ -54,6 +54,9 @@ userSchema.methods.comparePassword = function comparePassword(candidatePassword,
  * Helper method for getting user's gravatar.
  */
 userSchema.methods.gravatar = function gravatar(size) {
+  if (this.profile.picture) {
+    return this.profile.picture;
+  }
   if (!size) {
     size = 200;
   }

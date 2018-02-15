@@ -46,15 +46,23 @@ block content
             .col-sm-7
                 input.form-control(type='text', name='location', id='location', value=requestedUser.profile.location)
         .form-group
-            label.col-sm-3.control-label Foto Perfil
-            .col-sm-4
-                img(src=requestedUser.gravatar(), class='profile', width='100', height='100')
-        .form-group
             .col-sm-offset-3.col-sm-4
                 button.btn.btn.btn-success(type='submit')
                     i.fa.fa-pencil
                     | Atualizar Usuário
 
+    .page-header
+        h3 Foto Perfil
+    .form-horizontal
+        .form-group
+            label.col-sm-3.control-label Foto Perfil
+            .col-sm-4
+                img(src=requestedUser.gravatar(), class='profile', width='100', height='100')
+            .col-sm-4
+                form(role='form', action='/admin/edituser/upload?userid=' + requestedUser._id, enctype='multipart/form-data', method='POST')
+                    .form-group
+                        input(type='file', name='profile')
+                    button.btn.btn-primary(type='submit') Trocar Foto
     //.page-header
     //    h3 Trocar Senha
     //
