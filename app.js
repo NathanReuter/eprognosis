@@ -47,6 +47,7 @@ const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
+const patientsController = require('./controllers/patitent');
 
 /**
  * API keys and Passport configuration.
@@ -163,6 +164,8 @@ app.delete('/admin/users', passportConfig.isAuthenticated, userController.remove
 app.post('/admin/users', passportConfig.isAuthenticated, userController.putUpdateUser);
 app.get('/admin/edituser', passportConfig.isAuthenticated, userController.getEditUser);
 app.post('/admin/edituser/upload', upload.single('profile'), userController.updateProfilePhoto);
+app.get('/treatment/patients', passportConfig.isAuthenticated, patientsController.getPatientsPage);
+app.get('/treatment/newpatient', passportConfig.isAuthenticated, patientsController.getNewPatientPage);
 
 /**
  * API examples routes.

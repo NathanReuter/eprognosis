@@ -1,0 +1,29 @@
+extends ../../layout
+
+block content
+    h2 Pacientes
+    hr
+    .col-sm-8.col-sm-offset-2
+
+        .col-sm-3(style='padding-left: 0')
+            a.btn.btn-default(href='/treatment/newpatient', role='button')
+                i.fa.fa-plus
+                | Novo Paciente
+        .col-sm-9
+            input.form-control(type='text', name='search', id='search', placeholder='Buscar Paciente', autofocus)
+        hr.col-sm-12
+        table.table.table-striped.table-bordered.table-condensed
+            thead
+                tr
+                    th Perfil
+                    th Nome
+                    th Clube
+                    th Posição
+                tbody
+                    each patient in patients
+                        tr
+                            td=patient.picture
+                            td=patient.profile.name
+                            td=patient.career.club
+                            td=patient.career.position
+

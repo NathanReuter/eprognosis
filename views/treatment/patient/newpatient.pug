@@ -1,0 +1,48 @@
+extends ../../layout
+
+block content
+    .page-header
+        h3 Cadastro de Paciente
+    form.form-horizontal(action='/treatment/newpatient', method='POST')
+        .form-group
+            label.col-sm-3.control-label(for='name') Nome
+            .col-sm-7
+                input.form-control(type='text', name='name', id='name', required=true)
+        .form-group
+            label.col-sm-3.control-label(for='email') Email
+            .col-sm-7
+                input.form-control(type='email', name='email', id='email')
+        .form-group
+            label.col-sm-3.control-label Genero
+            .col-sm-6
+                label.radio.col-sm-3
+                    input(type='radio', name='gender', value='male', data-toggle='radio')
+                    span Masculino
+                label.radio.col-sm-3
+                    input(type='radio', name='gender', value='female', data-toggle='radio')
+                    span Feminino
+                label.radio.col-sm-3
+                    input(type='radio', name='gender', value='other', data-toggle='radio')
+                    span Outros
+        .form-group
+            label.col-sm-3.control-label Papel
+            .col-sm-6
+                label.radio.col-sm-3
+                    input(type='radio', name='role', value='user', data-toggle='radio', required=true)
+                    span Usuário
+                label.radio.col-sm-3
+                    input(type='radio', name='role', value='doctor', data-toggle='radio', required=true)
+                    span Médico
+        .form-group
+            label.col-sm-3.control-label(for='location') Endereço
+            .col-sm-7
+                input.form-control(type='text', name='location', id='location')
+        .form-group
+            label.col-sm-3.control-label Foto Perfil
+            .col-sm-4
+                img(src='', class='profile', width='100', height='100')
+        .form-group
+            .col-sm-offset-3.col-sm-4
+                button.btn.btn.btn-success(type='submit')
+                    i.fa.fa-pencil
+                    | Finalizar Cadastro
