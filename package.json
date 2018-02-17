@@ -1,15 +1,16 @@
 {
-  "name": "hackathon-starter",
+  "name": "eprognosis",
   "version": "4.3.0",
-  "description": "A boilerplate for Node.js web applications",
+  "description": "Esportive Medical System",
   "repository": {
     "type": "git",
     "url": "https://github.com/sahat/hackathon-starter.git"
   },
-  "author": "Sahat Yalkabov",
+  "author": "Nathan Reuter",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "node app.js",
+    "serve": "nodemon app.js",
     "test": "mocha --reporter spec",
     "postinstall": "npm rebuild node-sass",
     "eslint": "eslint **/*.js"
