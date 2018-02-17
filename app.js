@@ -20,6 +20,8 @@ const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
 const multer = require('multer');
 const crypto = require('crypto');
+const seedConfig = require('./config/seeds');
+
 
 /* Multer Storage Config */
 const storage = multer.diskStorage({
@@ -252,6 +254,7 @@ app.use(errorHandler());
 app.listen(app.get('port'), () => {
   console.log('%s App is running at http://localhost:%d in %s mode', chalk.green('✓'), app.get('port'), app.get('env'));
   console.log('  Press CTRL-C to stop\n');
+  seedConfig.loadSeeds();
 });
 
 module.exports = app;
