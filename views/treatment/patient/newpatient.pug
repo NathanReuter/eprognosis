@@ -3,7 +3,11 @@ extends ../../layout
 block content
     .page-header
         h3 Cadastro de Paciente
+    hr
+
+    h4 Dados Gerais
     form.form-horizontal(action='/treatment/newpatient', method='POST')
+        input(type='hidden', name='_csrf', value=_csrf)
         .form-group
             label.col-sm-3.control-label(for='name') Nome
             .col-sm-7
@@ -16,7 +20,7 @@ block content
             label.col-sm-3.control-label Genero
             .col-sm-6
                 label.radio.col-sm-3
-                    input(type='radio', name='gender', value='male', data-toggle='radio')
+                    input(type='radio', name='gender', value='male', data-toggle='radio', checked=true)
                     span Masculino
                 label.radio.col-sm-3
                     input(type='radio', name='gender', value='female', data-toggle='radio')
@@ -25,18 +29,93 @@ block content
                     input(type='radio', name='gender', value='other', data-toggle='radio')
                     span Outros
         .form-group
-            label.col-sm-3.control-label Papel
-            .col-sm-6
-                label.radio.col-sm-3
-                    input(type='radio', name='role', value='user', data-toggle='radio', required=true)
-                    span Usuário
-                label.radio.col-sm-3
-                    input(type='radio', name='role', value='doctor', data-toggle='radio', required=true)
-                    span Médico
-        .form-group
-            label.col-sm-3.control-label(for='location') Endereço
+            label.col-sm-3.control-label(for='cpf') CPF
             .col-sm-7
-                input.form-control(type='text', name='location', id='location')
+                input.form-control(type='text', name='cpf', id='cpf' required=true)
+        .form-group
+            label.col-sm-3.control-label(for='rg') RG
+            .col-sm-7
+                input.form-control(type='text', name='rg', id='rg')
+        .form-group
+            label.col-sm-3.control-label(for='birthday') Nacimento
+            .col-sm-7
+                input.form-control(type='date', name='birthday', id='birthday')
+        .form-group
+            label.col-sm-3.control-label(for='phone') Telefone
+            .col-sm-7
+                input.form-control(type='tel', name='phone', id='phone')
+        .form-group
+            label.col-sm-3.control-label(for='nacionality') Nacionalidade
+            .col-sm-7
+                input.form-control(type='text', name='nacionality', id='nacionality')
+        hr
+        h4 Endereço
+        .form-group
+            label.col-sm-3.control-label(for='zip') CEP
+            .col-sm-7
+                input.form-control(type='text', name='zip', id='zip')
+        .form-group
+            label.col-sm-3.control-label(for='city') Cidade
+            .col-sm-7
+                input.form-control(type='text', name='city', id='city')
+        .form-group
+            label.col-sm-3.control-label(for='state') Estado
+            .col-sm-7
+                input.form-control(type='text', name='state', id='state')
+        .form-group
+            label.col-sm-3.control-label(for='number') Número
+            .col-sm-7
+                input.form-control(type='number', name='number', id='number')
+        .form-group
+            label.col-sm-3.control-label(for='street') Rua
+            .col-sm-7
+                input.form-control(type='text', name='street', id='street')
+        .form-group
+            label.col-sm-3.control-label(for='complement') Complemento
+            .col-sm-7
+                input.form-control(type='text', name='complement', id='complement')
+        hr
+        h4 Plano de Saúde
+        .form-group
+            label.col-sm-3.control-label(for='insuranceName') Nome do Plano
+            .col-sm-7
+                select.form-control(name='insuranceName', id='insuranceName')
+                    option(value='', selected=true, disabled=true) Selecione
+                    option(value='unimed') Unimed
+                    option(value='bradesco ') Bradesco
+                    option(value='secovi ') Secovi
+        .form-group
+            label.col-sm-3.control-label(for='insuranceCode') Número
+            .col-sm-7
+                input.form-control(type='number', name='insuranceCode', id='insuranceCode')
+        hr
+        h4 Dados do Jogador
+        .form-group
+            label.col-sm-3.control-label(for='zip') Clube Atual
+            .col-sm-7
+                input.form-control(type='text', name='club', id='club')
+        .form-group
+            label.col-sm-3.control-label(for='position') Posição
+            .col-sm-7
+                select.form-control(name='position', id='position')
+                    option(value='', selected=true, disabled=true) Selecione
+                    option(value='zagueiro') Zagueiro
+                    option(value='ld ') Lateral Direito
+                    option(value='le') Lateral Esquerdo
+                    option(value='zagueiro') Volante
+                    option(value='zagueiro') Meio de Campo
+                    option(value='zagueiro') Atacante
+
+        .form-group
+            label.col-sm-3.control-label(for='category') Categoria
+            .col-sm-7
+                select.form-control(name='category', id='category')
+                    option(value='', selected=true, disabled=true) Selecione
+                    option(value='profissional') Profissional
+                    option(value='juniores ') Juniores
+                    option(value='juvenil') Juvenil
+        hr
+        h4 Imagem Perfil
         .form-group
             label.col-sm-3.control-label Foto Perfil
             .col-sm-4

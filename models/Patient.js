@@ -7,8 +7,8 @@ const mongoose = require('mongoose');
 
 const statesArray = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR',
   'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'];
-const positionArray = ['zagueiro', 'lateral direito', 'lateral esquerdo', 'volante', 'meio campo', 'atacante'];
-const categoryArray = ['prossicional', 'juniores', 'juvenil'];
+const positionArray = ['zagueiro', 'ld', 'le', 'volante', 'meio campo', 'atacante'];
+const categoryArray = ['profissional', 'juniores', 'juvenil'];
 const addressSchema = {
   street: String,
   city: String,

@@ -168,6 +168,7 @@ app.get('/admin/edituser', passportConfig.isAuthenticated, userController.getEdi
 app.post('/admin/edituser/upload', upload.single('profile'), userController.updateProfilePhoto);
 app.get('/treatment/patients', passportConfig.isAuthenticated, patientsController.getPatientsPage);
 app.get('/treatment/newpatient', passportConfig.isAuthenticated, patientsController.getNewPatientPage);
+app.post('/treatment/newpatient', passportConfig.isAuthenticated, patientsController.postNewPatient);
 
 /**
  * API examples routes.
