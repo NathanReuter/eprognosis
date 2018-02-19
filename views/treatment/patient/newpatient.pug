@@ -100,11 +100,11 @@ block content
                 select.form-control(name='position', id='position')
                     option(value='', selected=true, disabled=true) Selecione
                     option(value='zagueiro') Zagueiro
-                    option(value='ld ') Lateral Direito
+                    option(value='ld') Lateral Direito
                     option(value='le') Lateral Esquerdo
-                    option(value='zagueiro') Volante
-                    option(value='zagueiro') Meio de Campo
-                    option(value='zagueiro') Atacante
+                    option(value='volante') Volante
+                    option(value='meio campo') Meio de Campo
+                    option(value='atacante') Atacante
 
         .form-group
             label.col-sm-3.control-label(for='category') Categoria
@@ -112,16 +112,11 @@ block content
                 select.form-control(name='category', id='category')
                     option(value='', selected=true, disabled=true) Selecione
                     option(value='profissional') Profissional
-                    option(value='juniores ') Juniores
+                    option(value='juniores') Juniores
                     option(value='juvenil') Juvenil
         hr
-        h4 Imagem Perfil
-        .form-group
-            label.col-sm-3.control-label Foto Perfil
-            .col-sm-4
-                img(src='', class='profile', width='100', height='100')
         .form-group
             .col-sm-offset-3.col-sm-4
                 button.btn.btn.btn-success(type='submit')
                     i.fa.fa-pencil
-                    | Finalizar Cadastro
+                    | Próxima Etapa

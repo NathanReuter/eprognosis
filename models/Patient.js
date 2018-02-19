@@ -2,7 +2,7 @@
  * Created by nathangodinho on 15/02/2018.
  */
 const mongoose = require('mongoose');
-
+const crypto = require('crypto');
 // Export this in the future
 
 const statesArray = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR',
@@ -29,7 +29,7 @@ const patientMeasures = {
 };
 
 const career = {
-  club: { type: String, unique: true },
+  club: { type: String },
   position: { type: String, enum: positionArray },
   category: { type: String, enum: categoryArray }
 };
@@ -54,6 +54,23 @@ const patientSchema = new mongoose.Schema({
   patientMeasures
 }, { timestamps: true });
 
+
+/**
+ * Helper method for getting user's gravatar.
+ */
+patientSchema.methods.gravatar = function gravatar(size) {
+  if (this.picture) {
+    return this.picture;
+  }
+  if (!size) {
+    size = 200;
+  }
+  if (!this.email) {
+    return `https://gravatar.com/avatar/?s=${size}&d=retro`;
+  }
+  const md5 = crypto.createHash('md5').update(this.email).digest('hex');
+  return `https://gravatar.com/avatar/${md5}?s=${size}&d=retro`;
+};
 
 const Patient = mongoose.model('Patient', patientSchema);
 

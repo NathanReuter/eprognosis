@@ -94,18 +94,18 @@ block content
     //                i.fa.fa-trash
     //                | Deletar minha conta
 
-    .page-header
-        h3 Linked Accounts
-    .form-horizontal
-        .form-group
-            .col-sm-offset-3.col-sm-4
-            .col-sm-offset-3.col-sm-4
-                if user.google
-                    p: a.text-danger(href='/account/unlink/google') Desconectar conta do Google
-                else
-                    p: a(href='/auth/google') Conectar conta do Google
-            .col-sm-offset-3.col-sm-4
-                if user.facebook
-                    p: a.text-danger(href='/account/unlink/facebook') Desconectar conta do Facebooks
-                else
-                    p: a(href='/auth/facebook') Conectar conta do Facebook
+    //.page-header
+    //    h3 Linked Accounts
+    //.form-horizontal
+    //    .form-group
+    //        .col-sm-offset-3.col-sm-4
+    //        .col-sm-offset-3.col-sm-4
+    //            if user.google
+    //                p: a.text-danger(href='/account/unlink/google') Desconectar conta do Google
+    //            else
+    //                p: a(href='/auth/google') Conectar conta do Google
+    //        .col-sm-offset-3.col-sm-4
+    //            if user.facebook
+    //                p: a.text-danger(href='/account/unlink/facebook') Desconectar conta do Facebooks
+    //            else
+    //                p: a(href='/auth/facebook') Conectar conta do Facebook

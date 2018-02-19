@@ -12,18 +12,27 @@ block content
         .col-sm-9
             input.form-control(type='text', name='search', id='search', placeholder='Buscar Paciente', autofocus)
         hr.col-sm-12
-        table.table.table-striped.table-bordered.table-condensed
+        table.table.table-striped.table-bordered.table-condensed.patients-table
             thead
                 tr
                     th Perfil
                     th Nome
                     th Clube
                     th Posição
+                    th Categoria
                 tbody
                     each patient in patients
-                        tr
-                            td=patient.picture
-                            td=patient.profile.name
-                            td=patient.career.club
-                            td=patient.career.position
+                        tr.clickable-row(data-href='')
+                            td
+                                img(src=patient.gravatar(), class='profile', width='60', height='60')
+                            td=patient.name
+                            td=patient.career && patient.career.club
+                            td=patient.career && patient.career.position &&patient.career.position.toUpperCase()
+                            td=patient.career && patient.career.category && patient.career.category.toUpperCase()
 
+    script.
+        jQuery(document).ready(function($) {
+        $(".clickable-row").click(function() {
+            window.location = $(this).data("href");
+            });
+        });

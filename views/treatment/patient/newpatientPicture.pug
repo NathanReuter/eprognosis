@@ -1,0 +1,24 @@
+extends ../../layout
+
+block content
+    .page-header
+        h3 Cadastro de Paciente
+        hr
+        .page-header
+            h4 Foto Perfil
+        .form-horizontal
+            .form-group
+                label.col-sm-3.control-label Foto Atual
+                .col-sm-4
+                    img(src=patient.gravatar(), class='profile', width='150', height='150')
+                .col-sm-4
+                    form(role='form', action='/treatment/newpatient/upload?patientid=' + patient._id, enctype='multipart/form-data', method='POST')
+                        .form-group
+                            input(type='file', name='profile')
+                        button.btn.btn-primary(type='submit') Trocar Foto
+        hr
+        .form-group
+            .col-sm-offset-3.col-sm-4
+                a.btn.btn.btn-success(href='/treatment/patients')
+                    i.fa.fa-pencil
+                    | Finalizar Cadastro

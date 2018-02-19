@@ -76,7 +76,7 @@ mongoose.connection.on('error', (err) => {
 
 /* Excluded CSRF ROUTES */
 
-const exlucedCSRFRoutes = ['/api/upload', '/admin/edituser/upload'];
+const exlucedCSRFRoutes = ['/api/upload', '/admin/edituser/upload', '/treatment/newpatient/upload'];
 /**
  * Express configuration.
  */
@@ -169,6 +169,8 @@ app.post('/admin/edituser/upload', upload.single('profile'), userController.upda
 app.get('/treatment/patients', passportConfig.isAuthenticated, patientsController.getPatientsPage);
 app.get('/treatment/newpatient', passportConfig.isAuthenticated, patientsController.getNewPatientPage);
 app.post('/treatment/newpatient', passportConfig.isAuthenticated, patientsController.postNewPatient);
+app.get('/treatment/newpatientpicture', passportConfig.isAuthenticated, patientsController.getNewPatientPicturePage);
+app.post('/treatment/newpatient/upload', upload.single('profile'), passportConfig.isAuthenticated, patientsController.updatePatientPhoto);
 
 /**
  * API examples routes.

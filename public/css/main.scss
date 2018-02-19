@@ -93,3 +93,13 @@ textarea {
     margin: 0 5px;
   }
 }
+
+.patients-table {
+  td {
+    vertical-align: middle !important;
+  }
+}
+
+.clickable-row {
+  cursor: pointer;
+}
