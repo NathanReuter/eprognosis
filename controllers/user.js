@@ -465,7 +465,6 @@ exports.removeUser = (req, res, next) => {
       if (err) {
         return next(err);
       }
-      console.log('adminsCount', adminsCount);
 
       User.findById({ _id: userId }, (err, user) => {
         if (err) { return next(err); }

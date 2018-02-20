@@ -29,10 +29,6 @@ block content
                                 .btn.btn-danger(onclick='removeUser(' + "'" + user._id + "'" + ')')
                                     i.fas.fa-trash-alt
     script.
-        var getCSRFToken = function () {
-          return $('meta[name="csrf-token"]').attr('content');
-        };
-
         var routes = {
             removeRoute: '/admin/users',
             updateRoute: '/user'

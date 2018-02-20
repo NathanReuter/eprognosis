@@ -119,3 +119,14 @@ exports.updatePatientPhoto = (req, res, next) => {
     });
   });
 };
+
+
+exports.getRemovePatient = (req, res, next) => {
+  const patientid = req.query.patientid;
+
+  Patient.remove({ _id: patientid }, (err) => {
+    if (err) { return next(err); }
+    req.flash('success', { msg: 'Paciente Removido' });
+    res.send({ location: '/treatment/patients' });
+  });
+};

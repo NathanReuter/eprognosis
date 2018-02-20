@@ -7,10 +7,17 @@ block content
         .row
             .col-sm-4
                 img(src=patient.gravatar(), width=150, height=150)
-            .col-sm-8
+            .col-sm-6
                 h4=patient.name
                 h3=patient.getBirthday() + ' anos'
                 h3=patient.nationality
+            .col-sm-2.profile-buttons
+                a.clickable
+                    i.fas.fa-edit
+                    | Editar
+                a.clickable.delete-action(data-href='/treatment/patient?patientid=' + patient._id)
+                    i.fas.fa-trash-alt
+                    | Deletar
         hr
         h4 Contato
         .row
@@ -27,9 +34,9 @@ block content
         .h4 Plano de Saúde
             .row
                 .col-sm-6
-                    h4=patient.insurance.name.toUpperCase()
+                    h4=patient.insurance &&  patient.insurance.name && patient.insurance.name.toUpperCase()
                 .col-sm-6
-                    h4=patient.insurance.code
+                    h4=patient.insurance && patient.insurance.code
         hr
         h4 Carreira
             .row
@@ -58,5 +65,22 @@ block content
           });
           $('.cpf').text(function (i, text) {
             return text.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+          });
+          $('.delete-action').click(function () {
+            var link = $(this).data('href');
+
+            console.log(link);
+            $.ajax({
+              type: "DELETE",
+              url: link,
+              data: {
+                _csrf: getCSRFToken()
+              },
+              complete: function (res) {
+                var data = res.responseJSON;
+
+                window.location.href = data.location;
+              }
+            });
           });
         }

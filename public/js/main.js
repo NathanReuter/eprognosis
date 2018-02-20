@@ -1,5 +1,6 @@
+/* eslint-disable eol-last */
 $(document).ready(function() {
-
-  // Place JavaScript code here...
-
+  window.getCSRFToken = function () {
+    return $('meta[name="csrf-token"]').attr('content');
+  };
 });
