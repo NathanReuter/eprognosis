@@ -1,0 +1,62 @@
+extends ../../layout
+
+block content
+    h2 Paciente
+    hr
+    .col-sm-8.patient-profile
+        .row
+            .col-sm-4
+                img(src=patient.gravatar(), width=150, height=150)
+            .col-sm-8
+                h4=patient.name
+                h3=patient.getBirthday() + ' anos'
+                h3=patient.nationality
+        hr
+        h4 Contato
+        .row
+            .col-sm-6
+                h4.phone=patient.phone
+            .col-sm-6
+                h4=patient.email
+        .h4 Registro
+            .row
+                .col-sm-6
+                    h4.cpf='CPF: ' + patient.cpf
+                .col-sm-6
+                    h4='RG: ' + patient.rg
+        .h4 Plano de Saúde
+            .row
+                .col-sm-6
+                    h4=patient.insurance.name.toUpperCase()
+                .col-sm-6
+                    h4=patient.insurance.code
+        hr
+        h4 Carreira
+            .row
+                .col-sm-4
+                    h4.captalize= 'Time: ' + patient.career.club
+                .col-sm-4
+                    h4.captalize= 'Posição: ' + patient.career.position
+                .col-sm-4
+                    h4.captalize= 'Categoria: ' + patient.career.category
+
+    .col-sm-4
+        h3 Exames
+        hr
+        ul
+            li Exame 1
+            li Exame 2
+            li Exame 3
+            li Exame 4
+
+
+
+    script.
+        window.onload = function () {
+          $('.phone').text(function (i, text) {
+            return text.replace(/(\d{3})(\d{4})(\d{4})/, '($1) $2-$3');
+          });
+          $('.cpf').text(function (i, text) {
+            return text.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+          });
+        }

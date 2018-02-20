@@ -167,6 +167,7 @@ app.post('/admin/users', passportConfig.isAuthenticated, userController.putUpdat
 app.get('/admin/edituser', passportConfig.isAuthenticated, userController.getEditUser);
 app.post('/admin/edituser/upload', upload.single('profile'), userController.updateProfilePhoto);
 app.get('/treatment/patients', passportConfig.isAuthenticated, patientsController.getPatientsPage);
+app.get('/treatment/patient', passportConfig.isAuthenticated, patientsController.getPatientPage);
 app.get('/treatment/newpatient', passportConfig.isAuthenticated, patientsController.getNewPatientPage);
 app.post('/treatment/newpatient', passportConfig.isAuthenticated, patientsController.postNewPatient);
 app.get('/treatment/newpatientpicture', passportConfig.isAuthenticated, patientsController.getNewPatientPicturePage);

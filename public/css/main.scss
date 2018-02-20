@@ -102,4 +102,13 @@ textarea {
 
 .clickable-row {
   cursor: pointer;
+  &:hover {
+    background: #ddeeff !important;
+  }
+}
+
+.patient-profile {
+  background: #2d3e4f;
+  color: white;
+  padding: 20px;
 }

@@ -14,8 +14,23 @@ exports.getPatientsPage = (req, res, next) => {
       return next(err);
     }
     res.render('treatment/patient/patients', {
-      title: 'Paciente',
+      title: 'Pacientes',
       patients
+    });
+  });
+};
+
+exports.getPatientPage = (req, res, next) => {
+  const patientid = req.query.patientid;
+
+  console.log('patientid', patientid);
+  Patient.findById(patientid, (err, patient) => {
+    if (err) {
+      return next(err);
+    }
+    res.render('treatment/patient/patient', {
+      title: 'Paciente',
+      patient
     });
   });
 };

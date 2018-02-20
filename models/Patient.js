@@ -72,6 +72,19 @@ patientSchema.methods.gravatar = function gravatar(size) {
   return `https://gravatar.com/avatar/${md5}?s=${size}&d=retro`;
 };
 
+patientSchema.methods.getBirthday = function getBirthday() {
+  if (this.birthday) {
+    const today = new Date();
+    const birthDate = this.birthday;
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  }
+};
+
 const Patient = mongoose.model('Patient', patientSchema);
 
 module.exports = Patient;

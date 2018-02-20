@@ -22,7 +22,7 @@ block content
                     th Categoria
                 tbody
                     each patient in patients
-                        tr.clickable-row(data-href='')
+                        tr.clickable-row(data-href='/treatment/patient?patientid=' + patient._id)
                             td
                                 img(src=patient.gravatar(), class='profile', width='60', height='60')
                             td=patient.name
@@ -31,8 +31,12 @@ block content
                             td=patient.career && patient.career.category && patient.career.category.toUpperCase()
 
     script.
-        jQuery(document).ready(function($) {
-        $(".clickable-row").click(function() {
-            window.location = $(this).data("href");
+        var addListeners = function () {
+          jQuery(document).ready(function ($) {
+            $(".clickable-row").click(function () {
+              window.location = $(this).data("href");
             });
-        });
+          });
+        };
+
+        window.onload = addListeners;

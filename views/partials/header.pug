@@ -22,13 +22,15 @@
             ul.dropdown-menu
               li
                 a(href='/treatment/patients')
-                  i.fas.fa-address-book
-                  | Consultas
-              li.divider
-              li
-                a(href='/status')
                   i.fab.fa-accessible-icon
                   | Pacientes
+              li.divider
+              li
+                a(href='')
+                  i.fas.fa-address-book
+                  | Consultas
+
+
         if user && user.isadmin
           li.dropdown(class=(title === 'Admin') ? 'active' : undefined)
             a.dropdown-toggle(href='#', data-toggle='dropdown')
