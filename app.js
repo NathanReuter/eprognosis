@@ -50,6 +50,7 @@ const userController = require('./controllers/user');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
 const patientsController = require('./controllers/patitent');
+const evaluationController = require('./controllers/evaluation');
 
 /**
  * API keys and Passport configuration.
@@ -173,6 +174,9 @@ app.get('/treatment/newpatient', passportConfig.isAuthenticated, patientsControl
 app.post('/treatment/newpatient', passportConfig.isAuthenticated, patientsController.postNewPatient);
 app.get('/treatment/newpatientpicture', passportConfig.isAuthenticated, patientsController.getNewPatientPicturePage);
 app.post('/treatment/newpatient/upload', upload.single('profile'), passportConfig.isAuthenticated, patientsController.updatePatientPhoto);
+app.get('/treatment/createevaluation', passportConfig.isAuthenticated, evaluationController.getCreateEvalutionPage);
+app.post('/treatment/createevaluation', passportConfig.isAuthenticated, evaluationController.postCreateEvaluation);
+
 
 /**
  * API examples routes.

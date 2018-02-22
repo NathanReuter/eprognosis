@@ -43,11 +43,11 @@ block content
         .form-group
             label.col-sm-3.control-label(for='phone') Telefone
             .col-sm-7
-                input.form-control(type='tel', name='phone', id='phone')
+                input.phone.form-control(type='tel', name='phone', id='phone')
         .form-group
             label.col-sm-3.control-label(for='nacionality') Nacionalidade
             .col-sm-7
-                input.form-control(type='text', name='nacionality', id='nacionality')
+                input.form-control(type='text', name='nationality', id='nationality')
         hr
         h4 Endereço
         .form-group
@@ -120,3 +120,14 @@ block content
                 button.btn.btn.btn-success(type='submit')
                     i.fa.fa-pencil
                     | Próxima Etapa
+
+
+        script.
+          window.onload = function () {
+            $('.phone').on('input', function () {
+              $(this).val($(this).val().replace(/(\d{3})(\d{4})(\d{4})/, '($1) $2-$3'));
+            });
+            $('.cpf').text(function (i, text) {
+              return text.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+            });
+          }

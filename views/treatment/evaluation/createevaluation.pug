@@ -1,0 +1,83 @@
+extends ../../layout
+
+block content
+    .page-header
+        h3 Nova Avaliação
+    hr
+    h4 Medidas
+    form.form-horizontal(action='/treatment/createevaluation', method='POST')
+        input(type='hidden', name='_csrf', value=_csrf)
+        input(type='hidden', name='patient', value=patient._id)
+        .form-group
+            label.col-sm-3.control-label(for='height') Altura (cm)
+            .col-sm-7
+                input.form-control(type='text', name='height', id='height', required=true)
+        .form-group
+            label.col-sm-3.control-label(for='weight') Peso (Kg)
+            .col-sm-7
+                input.form-control(type='number', name='weight', id='weight', required=true)
+        .form-group
+            label.col-sm-3.control-label(for='dominance') Dominância
+            .col-sm-7
+                select.form-control(name='dominance', id='dominance')
+                    option(value='destro', selected=true) Destro
+                    option(value='canhoto ') Canhoto
+        hr
+        h4 Antecedentes
+        .form-group
+            label.col-sm-3.control-label(for='familyBackground') Familiares
+            .col-sm-5.background-div
+                input.form-control(type='text', name='familyBackground[0]', id='familyBackground', placeholder='ex: Diabetes')
+            .col-sm-2
+                a.btn.btn-default.newbackground-button(data-name='familyBackground')
+                    i.fas.fa-plus.no-margin
+        .form-group
+            label.col-sm-3.control-label(for='surgeryBackground') Cirurgicos
+            .col-sm-5.background-div
+                input.form-control(type='text', name='surgeryBackground[0]', id='surgeryBackground', placeholder='ex: Operação cerebral')
+            .col-sm-2
+                a.btn.btn-default.newbackground-button(data-name='surgeryBackground')
+                    i.fas.fa-plus.no-margin
+        .form-group
+            label.col-sm-3.control-label(for='traumaticBackground') Traumalógicos
+            .col-sm-5.background-div
+                input.form-control(type='text', name='traumaticBackground[0]', id='traumaticBackground')
+            .col-sm-2
+                a.btn.btn-default.newbackground-button(data-name='traumaticBackground')
+                    i.fas.fa-plus.no-margin
+        .form-group
+            label.col-sm-3.control-label(for='personalBackground') Pessoais
+            .col-sm-5.background-div
+                input.form-control(type='text', name='personalBackground[0]', id='personalBackground', placeholder='Ex: Vacinas')
+            .col-sm-2
+                a.btn.btn-default.newbackground-button(data-name='personalBackground')
+                    i.fas.fa-plus.no-margin
+        hr
+        .form-group
+            .col-sm-offset-3.col-sm-4
+                button.btn.btn.btn-success(type='submit')
+                    i.fa.fa-pencil
+                    | Confirmar
+
+
+    style.
+        .background-div {
+            border-left: 1px solid #95a4a6;
+            border-radius: 5px;
+        }
+
+        .background-div input, .newbackground-button {
+            margin: 5px;
+        }
+    script.
+      window.onload = function () {
+        $('.newbackground-button').click(function () {
+          var inputName = $(this).data('name'),
+            arrayCount = $('#'.concat(inputName)).parent().children().length,
+            inputTemplate = '<input class="form-control" type="text" name="$name" id="familyBackground">'
+                .replace('$name', inputName + '[' + arrayCount + ']');
+
+          $('#'.concat(inputName))
+            .before($(inputTemplate));
+        });
+      }

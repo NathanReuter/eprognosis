@@ -48,16 +48,29 @@ block content
                     h4.captalize= 'Categoria: ' + patient.career.category
 
     .col-sm-4
-        h3 Exames
-        hr
-        ul
-            li Exame 1
-            li Exame 2
-            li Exame 3
-            li Exame 4
+        .col-sm-12
+            h3 Avaliações
+            hr
+            if !patient.evaluations.length
+                a.btn.btn-success(href='/treatment/createevaluation?patientid=' + patient._id) Fazer primeira avaliação
+            else
+                .special-list
+                    ul
+                    for evaluation in patient.evaluations
+                        li
+                            a=evaluation
+                    a.btn.btn-success.newevalution-button(href='/treatment/createevaluation?patientid=' + patient._id)  Nova Avaliação
+        .col-sm-12
+            h3 Atendimentos
+            hr
+        .col-sm-12
+            h3 Histórico
+            hr
 
-
-
+    style.
+        .newevalution-button {
+            margin-top: 10px;
+        }
     script.
         window.onload = function () {
           $('.phone').text(function (i, text) {

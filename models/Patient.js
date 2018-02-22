@@ -4,9 +4,7 @@
 const mongoose = require('mongoose');
 const crypto = require('crypto');
 // Export this in the future
-
-const statesArray = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR',
-  'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'];
+const statesArray = require('./../constants/States').brStatesArray;
 const positionArray = ['zagueiro', 'ld', 'le', 'volante', 'meio campo', 'atacante'];
 const categoryArray = ['profissional', 'juniores', 'juvenil'];
 const addressSchema = {
@@ -23,20 +21,16 @@ const addressSchema = {
   zip: Number
 };
 
-const patientMeasures = {
-  weight: Number,
-  height: Number
-};
-
 const career = {
   club: { type: String },
+  clubActivityOpening: Date,
   position: { type: String, enum: positionArray },
   category: { type: String, enum: categoryArray }
 };
 
 const patientSchema = new mongoose.Schema({
-  name: { type: String, unique: true },
-  gender: String,
+  name: { type: String, required: true },
+  gender: { type: String, required: true },
   birthday: Date,
   phone: [String],
   cpf: { type: String, unique: true },
@@ -51,7 +45,7 @@ const patientSchema = new mongoose.Schema({
   tokens: Array,
   address: [addressSchema],
   career,
-  patientMeasures
+  evaluations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Evaluation' }]
 }, { timestamps: true });
 
 
