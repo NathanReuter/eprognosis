@@ -91,9 +91,13 @@ block content
         hr
         h4 Dados do Jogador
         .form-group
-            label.col-sm-3.control-label(for='zip') Clube Atual
+            label.col-sm-3.control-label(for='club') Clube Atual
             .col-sm-7
                 input.form-control(type='text', name='club', id='club')
+        .form-group
+            label.col-sm-3.control-label(for='clubActivityOpening') Início de Atividade no Clube
+            .col-sm-7
+                input.form-control(type='date', name='clubActivityOpening', id='clubActivityOpening')
         .form-group
             label.col-sm-3.control-label(for='position') Posição
             .col-sm-7

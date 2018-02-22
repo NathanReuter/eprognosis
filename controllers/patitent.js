@@ -75,6 +75,7 @@ exports.postNewPatient = (req, res, next) => {
     },
     career: {
       club: body.club,
+      clubActivityOpening: body.clubActivityOpening,
       position: body.position,
       category: body.category
     }
